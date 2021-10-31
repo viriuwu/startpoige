@@ -61,7 +61,11 @@ body {
 #term, #interpret, #prompt {
     width: 70%;
     font-family: mononoki;
-    font-size: 1.25em;
+    font-size: 2em;
     background-color: #111111;
     color: #eeeeee;
+}
+
+::selection {
+    background-color: #555555;
 }

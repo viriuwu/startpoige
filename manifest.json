@@ -1,0 +1,10 @@
+{
+    "manifest_version": 3,
+    "name": "startpoige",
+    "version": "0",
+    "description": "=w=",
+
+    "chrome_url_overrides": {
+	"newtab": "new.html"
+    }
+}
