@@ -1,3 +1,7 @@
+* {
+    line-height: 1;
+}
+
 html, body {
     margin: 0;
     padding: 0;
@@ -12,12 +16,21 @@ html, body {
     transform: translateY(calc(-50% + 50vh));
 }
 
-#term, #prompt, #interpret {
+#term {
+    overflow-x: hidden;
+}
+
+#term, #interpret {
+    padding: 0.25em;
+    padding-bottom: 0;
+}
+
+#prompt {
     padding: 0.25em;
 }
 
 #term, #interpret {
-    white-space: nowrap;
+    white-space: normal;
     overflow-y: auto;
     margin: 0;
 }
@@ -37,10 +50,6 @@ body {
     background-color: #222222;
 }
 
-#term {
-    height: 40vh;
-}
-
 #term::-webkit-scrollbar-thumb {
     background: #333333;
 }
@@ -50,7 +59,7 @@ body {
 }
 
 #term, #interpret, #prompt {
-    width: 75%;
+    width: 70%;
     font-family: mononoki;
     font-size: 1.25em;
     background-color: #111111;
