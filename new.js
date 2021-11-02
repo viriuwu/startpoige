@@ -4,9 +4,17 @@ const prompt = document.getElementById("prompt");
 
 const unit_font = parseInt(window.getComputedStyle(prompt).fontSize.slice(0, -2));
 
+const html_escape = (str) =>
+      str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+
+const text_colour = (text, col) =>
+      `<span style="color: var(--col-${col});">${text}</span>`;
+
+const engines_format = (engine) =>
+    engine.name ? `${text_colour(engine.name, "engine")}` : `${text_colour(engine.tag, "unknown")}?`;
+
 const input = () => {
     interpret_update(prompt.value);
-    console.log(parse(prompt.value));
 };
 
 const is_enter = () => {
@@ -38,30 +46,42 @@ const window_resize = () => {
     }
 };
 
-const interpret_update = (input) => {
-    if (input !== "") {
-	interpret.innerHTML = input;
-    } else {
-	interpret.innerHTML = "&nbsp;";
-    }
-};
-
 const parse = (input) => {
     const match = (new RegExp(`^ *((?:${config_engine_prefix}.*? +)+)(.*?) *$`)).exec(input);
     if (match) {
-	return { engines: parse_engines(match[1]), query: match[2] };
+	return { engines: engines_parse(match[1]), query: match[2] };
     } else {
 	return { engines: [""], query: input };
     }
 };
 
-const parse_engines = (match) =>
+const engines_parse = (match) =>
     [...new Set(
 	match
 	    .split(" ")
 	    .filter(x => x)
 	    .map(x => x.substr(config_engine_prefix.length))
     )]; 
+
+const engines_get = (tag) => {
+    const s = config_search_engines.find((engine) => engine.tag == tag);
+    return s ? s : { "tag": tag };
+};
+
+const interpret_update = (input) => {
+    const i = html_escape(input.trim());
+    const p = parse(i);
+    if (i != "") {
+	interpret.innerHTML = p
+	    .engines
+	    .map(engines_get)
+	    .map(engines_format)
+	    .join(", ")
+	    .concat(` ${config_search_char} ${text_colour(p.query, "query")}`);
+    } else {
+	interpret.innerHTML = "&nbsp;";
+    }
+};
 
 prompt.addEventListener("input", input);
 prompt.addEventListener("keydown", is_enter);

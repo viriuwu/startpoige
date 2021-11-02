@@ -1,0 +1,95 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+* {
+    line-height: 1;
+}
+
+#stuff {
+    display: grid;
+    place-items: center;
+    transform: translateY(calc(-50% + 50vh));
+}
+
+#prompt {
+    outline: none;
+    border: none;
+}
+
+#interpret {
+    white-space: nowrap;
+    overflow: hidden;
+    margin-top: -1px;
+    margin-bottom: -1px;
+}
+
+/* stylable */
+
+body {
+    background-color: var(--col-body);
+}
+
+#prompt {
+    padding: var(--padding);
+}
+
+#interpret {
+    padding: var(--padding);
+    padding-right: 0;
+    border-right: var(--padding) solid var(--col-term);
+}
+
+#term {
+    white-space: normal;
+    overflow-x: hidden;
+    overflow-y: auto;
+    padding-left:  var(--padding);
+    padding-right: var(--padding);
+    padding-bottom: 0;
+    margin: 0;
+    border-top: var(--padding) solid var(--col-term);
+}
+
+#term::-webkit-scrollbar-thumb {
+    background: var(--col-special);
+}
+
+#term::-webkit-scrollbar, #term::-webkit-scrollbar-corner {
+    background: var(--col-term);
+}
+
+::selection {
+    background-color: var(--col-special);
+}
+
+#term, #interpret, #prompt {
+    width:            70%;
+    font-family:      var(--font);
+    font-size:        var(--font-size);
+    background-color: var(--col-term);
+    color:            var(--col-font);
+}
+
+/* customisation */
+
+:root {
+    --font:          mononoki;
+    --font-size:     2.5em;
+    --padding:       0.25em;
+    --col-term:      #3b3228;
+    --col-body:      #534636;
+    --col-bar:       #645240;
+    --col-font:      #e9e1dd;
+    --col-special:   #7e705a;
+}
+
+#stuff {
+    --col-query:     #f4bc87;
+    --col-engine:    #beb55b;
+    --col-unknown:   #cb6077;
+}
