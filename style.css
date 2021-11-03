@@ -1,8 +1,8 @@
 html, body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100vw;
+    margin:   0;
+    padding:  0;
+    height:   100vh;
+    width:    100vw;
     overflow: hidden;
 }
 
@@ -11,20 +11,20 @@ html, body {
 }
 
 #stuff {
-    display: grid;
+    display:     grid;
     place-items: center;
-    transform: translateY(calc(-50% + 50vh));
+    transform:   translateY(calc(-50% + 50vh));
 }
 
 #prompt {
     outline: none;
-    border: none;
+    border:  none;
 }
 
 #interpret {
-    white-space: nowrap;
-    overflow: hidden;
-    margin-top: -1px;
+    white-space:   nowrap;
+    overflow:      hidden;
+    margin-top:    -1px;
     margin-bottom: -1px;
 }
 
@@ -39,20 +39,21 @@ body {
 }
 
 #interpret {
-    padding: var(--padding);
+    border-right:  var(--padding) solid var(--col-term);
+    padding:       var(--padding);
     padding-right: 0;
-    border-right: var(--padding) solid var(--col-term);
 }
 
 #term {
-    white-space: normal;
-    overflow-x: hidden;
-    overflow-y: auto;
+    height:        0;
+    white-space:   normal;
+    overflow-x:    hidden;
+    overflow-y:    auto;
+    margin:        0;
+    border-top:    var(--padding) solid var(--col-term);
     padding-left:  var(--padding);
     padding-right: var(--padding);
     padding-bottom: 0;
-    margin: 0;
-    border-top: var(--padding) solid var(--col-term);
 }
 
 #term::-webkit-scrollbar-thumb {
@@ -68,16 +69,37 @@ body {
 }
 
 #term, #interpret, #prompt {
-    width:            70%;
+    width:            var(--width);
     font-family:      var(--font);
     font-size:        var(--font-size);
     background-color: var(--col-term);
     color:            var(--col-font);
 }
 
+/*
+breakpoints for changing height and visibility off the term and stuff
+calculate by: height = (5 + 2x) * font-size(px)
+where x is the number of rows for the terminal
+use 0 to hide interpret and -1 for the prompt.
+*/
+
+@media screen and (max-height: 60px)  { #prompt { display: none; } }
+@media screen and (max-height: 100px) { #interpret { display: none; } }
+@media screen and (max-height: 140px) { #term { display: none; } }
+
+@media screen and (min-height: 140px) { #term { height: 1em } }
+@media screen and (min-height: 180px) { #term { height: 2em } }
+@media screen and (min-height: 220px) { #term { height: 3em } }
+@media screen and (min-height: 260px) { #term { height: 4em } }
+@media screen and (min-height: 300px) { #term { height: 5em } }
+@media screen and (min-height: 340px) { #term { height: 6em } }
+@media screen and (min-height: 380px) { #term { height: 7em } }
+@media screen and (min-height: 420px) { #term { height: 8em } }
+
 /* customisation */
 
 :root {
+    --width:         70%;
     --font:          mononoki;
     --font-size:     2.5em;
     --padding:       0.25em;
