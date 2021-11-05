@@ -28,7 +28,7 @@ html, body {
     margin-bottom: -1px;
 }
 
-/* stylable */
+/* styling */
 
 body {
     background-color: var(--col-body);
@@ -57,7 +57,7 @@ body {
 }
 
 #term::-webkit-scrollbar-thumb {
-    background: var(--col-special);
+    background: var(--col-scrollbar);
 }
 
 #term::-webkit-scrollbar, #term::-webkit-scrollbar-corner {
@@ -65,7 +65,7 @@ body {
 }
 
 ::selection {
-    background-color: var(--col-special);
+    background-color: var(--col-selection);
 }
 
 #term, #interpret, #prompt {
@@ -76,12 +76,7 @@ body {
     color:            var(--col-font);
 }
 
-/*
-breakpoints for changing height and visibility off the term and stuff
-calculate by: height = (5 + 2x) * font-size(px)
-where x is the number of rows for the terminal
-use 0 to hide interpret and -1 for the prompt.
-*/
+/* breakpoints for changing height and visibility off the term and stuff */
 
 @media screen and (max-height: 60px)  { #prompt { display: none; } }
 @media screen and (max-height: 100px) { #interpret { display: none; } }
@@ -97,25 +92,42 @@ use 0 to hide interpret and -1 for the prompt.
 @media screen and (min-height: 420px) { #term { height: 8em } }
 @media screen and (min-height: 460px) { #term { height: 9em } }
 @media screen and (min-height: 500px) { #term { height: 10em} }
+@media screen and (min-height: 540px) { #term { height: 11em} }
+@media screen and (min-height: 580px) { #term { height: 12em} }
 
 /* customisation */
 
 :root {
     --width:         70%;
     --font:          mononoki;
-    --font-size:     2.5em;
+    --font-size:     2.25em;
     --padding:       0.25em;
     --col-term:      #3b3228;
     --col-body:      #534636;
     --col-bar:       #645240;
     --col-font:      #e9e1dd;
-    --col-special:   #7e705a;
+    --col-selection: #645240;
+    --col-scrollbar: #7e705a;
 }
 
-#stuff {
-    --col-diminish:  #b8afad;
-    --col-bookmark:  #7bbda4;
-    --col-query:     #f4bc87;
-    --col-engine:    #beb55b;
-    --col-unknown:   #cb6077;
+.diminish {
+    color: #7e705a;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+.bookmark {
+    color: #7bbda4;
+}
+
+.query {
+    color: #f4bc87;
+}
+
+.engine {
+    color: #beb55b;
+}
+
+.unknown {
+    color: #cb6077;
 }
