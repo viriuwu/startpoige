@@ -111,6 +111,6 @@ interpret_update("");
 
 prompt.placeholder = config_prompt_placeholders[Math.floor(Math.random() * config_prompt_placeholders.length)];
 
-const bookmarks_text = config_bookmarks.map(x => span_class(`${config_bookmark_prefix}${x.tag}`, "bookmark").concat(span_class(` (${x.name})`, "diminish"))).join(" ");
-const engines_text = config_search_engines .map(x => span_class(`${config_engine_prefix}${x.tag}`, "engine").concat(span_class(` (${x.name})`, "diminish"))) .join(" ");
+const bookmarks_text = config_bookmarks.map(x => span_class(`${config_bookmark_prefix}${x.tag}`, "bookmark").concat(span_class(`(${x.name})`, "diminish"))).join(" ");
+const engines_text = config_search_engines.map(x => span_class(`${config_engine_prefix}${x.tag}`, "engine").concat(span_class(`(${x.name})`, "diminish"))).join(" ");
 term.innerHTML = engines_text.concat("<br><br>").concat(bookmarks_text);
