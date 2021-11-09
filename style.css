@@ -76,7 +76,7 @@ body {
     color:            var(--col-font);
 }
 
-/* breakpoints for changing height and visibility off the term and stuff */
+/* breakpoints for changing height and visibility of the term and stuff */
 
 @media screen and (max-height: 60px)  { #prompt { display: none; } }
 @media screen and (max-height: 100px) { #interpret { display: none; } }
@@ -99,20 +99,20 @@ body {
 
 :root {
     --width:         70%;
-    --font:          mononoki;
+    --font:          "mononoki", monospace;
     --font-size:     2.25em;
     --padding:       0.25em;
     --col-term:      #3b3228;
     --col-body:      #534636;
     --col-bar:       #645240;
     --col-font:      #e9e1dd;
-    --col-selection: #645240;
+    --col-selection: #534636;
     --col-scrollbar: #7e705a;
 }
 
 .diminish {
     color: #7e705a;
-    opacity: 0.9;
+    opacity: 0.7;
     font-style: italic;
 }
 
