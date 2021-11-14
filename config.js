@@ -17,29 +17,29 @@ const config_url_replace = "{}";
 // a default search engine must have an empty string as a tag.
 const config_search_engines = [
     {
-	name: "default",
-	tag: "",
-	url: "https://duckduckgo.com/?q={}"
+        name: "default",
+        tag: "",
+        url: "https://duckduckgo.com/?q={}"
     },
     {
-	name: "github",
-	tag: "gh",
-	url: "https://github.com/search?q={}"
+        name: "github",
+        tag: "gh",
+        url: "https://github.com/search?q={}"
     },
     {
-	name: "google",
-	tag: "go",
-	url: "https://www.google.co.uk/search?q={}"
+        name: "google",
+        tag: "go",
+        url: "https://www.google.co.uk/search?q={}"
     },
     {
-	name: "wikipedia",
-	tag: "wiki",
-	url: "https://www.wikipedia.org/wiki/{}"
+        name: "wikipedia",
+        tag: "wiki",
+        url: "https://www.wikipedia.org/wiki/{}"
     },
     {
-	name: "youtube",
-	tag: "yt",
-	url: "https://www.youtube.com/results?search_query={}"
+        name: "youtube",
+        tag: "yt",
+        url: "https://www.youtube.com/results?search_query={}"
     }
 ];
 
@@ -50,13 +50,13 @@ const config_bookmark_prefix = "#";
 // a 'tag' by which you refer to it, a 'name' which will be displayed, and a 'url' to open.
 const config_bookmarks = [
     {
-	name: "weather",
-	tag: "w",
-	url: "https://wttr.in"
+        name: "weather",
+        tag: "w",
+        url: "https://wttr.in"
     },
     {
-	name: "xkcd",
-	tag: "xkcd",
-	url: "https://xkcd.com"
+        name: "xkcd",
+        tag: "xkcd",
+        url: "https://xkcd.com"
     }
 ];
