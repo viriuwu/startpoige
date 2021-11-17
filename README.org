@@ -1,28 +1,35 @@
 #+title: startpoige
 
-Terminal inspired browser startpage, with the functionality to add and search multiple custom search engines at once.
+Terminal inspired browser startpage, with the functionality to add and search multiple custom search engines at once
 
-Inspired by a Chromium feature to query a custom search engine by prefixing the query with a keyword.
+Inspired by a Chromium feature to query a custom search engine by prefixing the query with a keyword
 
 * Usage
 ** Downloading
 + Clone the repository
-+ On Chromium based browsers, add the folder as an Unpacked Extension (requires Developer Mode). On other browsers, point your newtab page to the contained =new.html=.
++ On Chromium based browsers, add the folder as an Unpacked Extension (requires Developer Mode). On other browsers, point your newtab page to the contained =new.html=
 + Customise and enjoy! (See below!)
 
 ** Search engines
-The default prefix for a search engine is =@=.
-To use specific search engines, prefix your query with any number of =@abc= where =abc= is a label/"tag" for a custom search engine.
+The default prefix for a search engine is =@=
+To use specific search engines, prefix your query with any number of =@abc= where =abc= is a label/"tag" for a custom search engine
+
 For example, =@foo @bar query= will search =query= on search engines labelled =foo= and =bar=.
-If no engines are specified, the default search engine is the one with an empty tag. This can also be added explicitly by using the prefix but with no tag, for example, =@ @foo query= will search the default search engine and =foo= for =query=.
+If no engines are specified, the default search engine is the one with an empty tag. This can also be added explicitly by using the prefix but with no tag, for example, =@ @foo query= will search the default search engine and =foo= for =query=
 
 ** Bookmarks
-The default prefix for a bookmark is =#=. You can open any number of bookmarks by using any number of =#foo= where =foo= is a label/"tag" for the specific bookmark.
+The default prefix for a bookmark is =#=. You can open any number of bookmarks by using any number of =#foo= where =foo= is a label/"tag" for the specific bookmark
+
+** Tab completion
+Pressing =Tab= will attempt to complete the tag for a search engine or bookmark, up to the longest common prefix for possible candidates
+
+For unknown tags, the text will be selected to make retyping easier!
 
 * Customisation
-Your search engines, bookmarks, and settings are contained within =config.js=.
-The appearance of the page is in =style.css=.
++ Your search engines, bookmarks, and settings are contained within =config.js=
++ The appearance of the page is in =style.css=
++ Choose your own favicon with =icon.png=
 
-I encourage you to build on top of this base to make your page your own!
+I encourage you to build on top of this base to make your startpoige your own! ^^
 
-The default colour scheme is [[https://github.com/chriskempson/base16][base16 Mocha]] and the default font is [[https://madmalik.github.io/mononoki/][mononoki]].
+The default colour scheme is [[https://github.com/chriskempson/base16][base16 Mocha]] and the default font is [[https://madmalik.github.io/mononoki/][mononoki]]

@@ -2,6 +2,11 @@ const term = document.getElementById("term");
 const interpret = document.getElementById("interpret");
 const prompt = document.getElementById("prompt");
 
+config_search_engines.forEach(x => x.tag = x.tag.replace(/ /g, "-"));
+config_bookmarks.forEach(x => x.tag = x.tag.replace(/ /g, "-"));
+
+// helper functions
+
 const html_escape = (str) =>
       str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
@@ -24,13 +29,23 @@ const bookmarks_get = (tag) => {
     return s ? s : { "tag": tag };
 }
 
+// input functions
+
 const input = () => interpret_update(prompt.value);
 
-const is_enter = () => {
+const keydown = () => {
     if (event.keyCode == 13) {
+        // enter
         search(prompt.value);
+    } else if (event.keyCode == 9) {
+        // tab
+        event.preventDefault();
+        tab_complete();
+        input();
     }
 };
+
+// parsing and updating functions
 
 const parse = (input) => {
     const i = input.trim();
@@ -64,6 +79,26 @@ const parse = (input) => {
     }
 };
 
+const interpret_update = (input) => {
+    const parsed = parse(html_escape(input.trim()));
+    if (parsed.type == "engine") {
+        interpret.innerHTML = parsed
+            .engines
+            .map(engines_get)
+            .map(engines_format)
+            .join(", ")
+            .concat(` ${config_search_char} ${span_class(parsed.query, "query")}`);
+    } else if (parsed.type == "bookmark") {
+        interpret.innerHTML = parsed
+            .bookmarks
+            .map(bookmarks_get)
+            .map(bookmarks_format)
+            .join(", ");
+    }
+};
+
+// search
+
 const search = (input) => {
     const parsed = parse(input.trim());
     if (parsed.type == "engine") {
@@ -86,30 +121,79 @@ const search = (input) => {
     }
 };
 
-const interpret_update = (input) => {
-    const parsed = parse(html_escape(input.trim()));
-    if (parsed.type == "engine") {
-        interpret.innerHTML = parsed
-            .engines
-            .map(engines_get)
-            .map(engines_format)
-            .join(", ")
-            .concat(` ${config_search_char} ${span_class(parsed.query, "query")}`);
-    } else if (parsed.type == "bookmark") {
-        interpret.innerHTML = parsed
-            .bookmarks
-            .map(bookmarks_get)
-            .map(bookmarks_format)
-            .join(", ");
+// tab completion
+
+const greatest_common_prefix =
+      a => [...Array(a[0].length + 1)]
+          .map((_, i) => a[0].slice(0, i))
+          .reverse()
+          .filter((s) =>
+              a.reduce((acc, el) =>
+                  acc && el.startsWith(s), true))[0];
+
+const tab_complete = () => {
+    const ep = config_engine_prefix;
+    const bp = config_bookmark_prefix;
+
+    // find the index of the selected word
+    const w = prompt.value.split(" ");
+    const idx = Math.max(0, w.length - [...Array(w.length + 1)]
+          .map((_, i) => w.slice(0, i).join(" ").length)
+                         .filter(x => x >= prompt.selectionStart).length);
+
+    // if not prefixed, this is a regular word
+    if (w[idx].startsWith(ep) || w[idx].startsWith(bp)) {
+        let s, p, space;
+        // get word without the prefix, as well as what to search (engines or bookmarks)
+        if (w[idx].startsWith(ep)) {
+            s = w[idx].slice(ep.length);
+            p = ep;
+            space = config_search_engines;
+        } else {
+            s = w[idx].slice(bp.length);
+            p = bp;
+            space = config_bookmarks;
+        }
+
+        // get the possible options
+        const options = space
+              .map(x => x.tag)
+              .filter(x => x.startsWith(s));
+
+        if (options.length >= 1) {
+            w[idx] = p
+                .concat(greatest_common_prefix(options));
+
+            prompt.value = w.join(" ");
+            const pos = w.slice(0, idx + 1).join(" ").length;
+            prompt.setSelectionRange(pos, pos);
+
+        } else {
+            // if nothing is found, select the unknown for easy replacement
+            const pos = w.slice(0, idx + 1).join(" ").length;
+            prompt.setSelectionRange(pos - s.length, pos);
+        }
     }
-};
+}
+
+// putting it all together + displayed text
 
 prompt.addEventListener("input", input);
-prompt.addEventListener("keydown", is_enter);
-interpret_update("");
+prompt.addEventListener("keydown", keydown);
+
+const bookmarks_text = config_bookmarks
+      .sort(config_sort)
+      .map(x => span_class(`${config_bookmark_prefix}${x.tag}`, "bookmark")
+           .concat(span_class(`(${x.name})`, "diminish")))
+      .join(" ");
+
+const engines_text = config_search_engines
+      .sort(config_sort)
+      .map(x => span_class(`${config_engine_prefix}${x.tag}`, "engine")
+           .concat(span_class(`(${x.name})`, "diminish")))
+      .join(" ");
+
+term.innerHTML = engines_text.concat("<br><br>").concat(bookmarks_text);
 
 prompt.placeholder = config_prompt_placeholders[Math.floor(Math.random() * config_prompt_placeholders.length)];
-
-const bookmarks_text = config_bookmarks.map(x => span_class(`${config_bookmark_prefix}${x.tag}`, "bookmark").concat(span_class(`(${x.name})`, "diminish"))).join(" ");
-const engines_text = config_search_engines.map(x => span_class(`${config_engine_prefix}${x.tag}`, "engine").concat(span_class(`(${x.name})`, "diminish"))).join(" ");
-term.innerHTML = engines_text.concat("<br><br>").concat(bookmarks_text);
+interpret_update("");

@@ -4,6 +4,10 @@ const config_prompt_placeholders = ["search..."];
 // separator between search engines and query
 const config_search_char = ">"
 
+// sorting function for search engines and bookmarks, default sorts alphabetically.
+const config_sort = (x, y) => x.tag > y.tag ? 1 : -1;
+// 0 disables sorting
+
 // prefix for denoting engines in search queries, e.g "@" means "@abc"
 // refers to whichever search engine is given the tag "abc".
 const config_engine_prefix = "@";
@@ -58,5 +62,10 @@ const config_bookmarks = [
         name: "xkcd",
         tag: "xkcd",
         url: "https://xkcd.com"
+    },
+    {
+        name: "git repo",
+        tag: "repo",
+        url: "https://github.com/poinwn/startpoige"
     }
 ];

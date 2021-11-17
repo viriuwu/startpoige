@@ -82,18 +82,18 @@ body {
 @media screen and (max-height: 100px) { #interpret { display: none; } }
 @media screen and (max-height: 140px) { #term { display: none; } }
 
-@media screen and (min-height: 140px) { #term { height: 1em } }
-@media screen and (min-height: 180px) { #term { height: 2em } }
-@media screen and (min-height: 220px) { #term { height: 3em } }
-@media screen and (min-height: 260px) { #term { height: 4em } }
-@media screen and (min-height: 300px) { #term { height: 5em } }
-@media screen and (min-height: 340px) { #term { height: 6em } }
-@media screen and (min-height: 380px) { #term { height: 7em } }
-@media screen and (min-height: 420px) { #term { height: 8em } }
-@media screen and (min-height: 460px) { #term { height: 9em } }
-@media screen and (min-height: 500px) { #term { height: 10em} }
-@media screen and (min-height: 540px) { #term { height: 11em} }
-@media screen and (min-height: 580px) { #term { height: 12em} }
+@media screen and (min-height: 140px) { #term { height: 1em  } }
+@media screen and (min-height: 180px) { #term { height: 2em  } }
+@media screen and (min-height: 220px) { #term { height: 3em  } }
+@media screen and (min-height: 260px) { #term { height: 4em  } }
+@media screen and (min-height: 300px) { #term { height: 5em  } }
+@media screen and (min-height: 340px) { #term { height: 6em  } }
+@media screen and (min-height: 380px) { #term { height: 7em  } }
+@media screen and (min-height: 420px) { #term { height: 8em  } }
+@media screen and (min-height: 460px) { #term { height: 9em  } }
+@media screen and (min-height: 500px) { #term { height: 10em } }
+@media screen and (min-height: 540px) { #term { height: 11em } }
+@media screen and (min-height: 580px) { #term { height: 12em } }
 
 /* customisation */
 
